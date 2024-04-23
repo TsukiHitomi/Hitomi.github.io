@@ -99,9 +99,54 @@
             z-index: 1;
         }
 
+
+        .rm {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            width: 200px;
+            height: 50%;
+            /* background-color: rgba(206, 182, 182, 0.637); */
+            /* display: flex; */
+            /* 纵向布局 */
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+            overflow-y: auto;
+            z-index: 1;
+            transform: translateY(-50%); /* 垂直居中 */
+        }
+
+        .t {
+            position: relative;
+            width: 165px;
+            height: 9%;
+            left: 35px;
+            background-color: rgba(206, 182, 182, 0.637);
+            transition: .5s;
+            /* transition: opacity 0.5s; */
+            overflow: hidden;
+            display: flex;
+            /* justify-content: space-between; */
+            align-items: center;
+            /* overflow-y: auto; */
+            margin-bottom: 12.5px; /* 添加这一行 */
+        }
+
+        /* .rt {
+            position: relative;
+            right: 10px;
+        } */
+
+
         .k:hover {
             background-color: rgb(57, 144, 144);
             color: rgb(19, 48, 38);
+        }
+        .t:hover {
+            background-color: rgb(57, 144, 144);
+            color: rgb(19, 48, 38);
+            cursor: pointer;
         }
 
         .content {
@@ -111,7 +156,7 @@
         }
 
         .content.active {
-            opacity: 1; /* 添加这一行 */
+            opacity: 1;
         }
 
         .lt::-webkit-scrollbar {
@@ -119,7 +164,7 @@
         }
 
         .p-spacing {
-            margin-bottom: 12.5px; /* 调整间距大小 */
+            margin-bottom: 12.5px;
         }
 
 
@@ -177,6 +222,13 @@
 </head>
 
 <body>
+    <div class="rm">
+        <div class="t"><span class="lf">「孤独、梦与奇迹」</span></div>
+        <div class="t"><span class="lf">「白菜梗与大番薯」</span></div>
+        <div class="t"><span class="lf">「满目星河皆是你」</span></div>
+        <div class="t"><span class="lf">「鸟之诗」</span></div>
+        <div class="t"><span class="lf">「 嘘」</span></div>
+    </div>
     <div class="lt">
         <div class="k"><span class="lf">「岁岁年年」</span></div>
         <div class="k"><span class="lf">「许个愿吧」</span></div>
@@ -203,6 +255,8 @@
     <script>
         let p = document.querySelector(".p")
         let k = document.getElementsByClassName("k")
+        let t = document.getElementsByClassName("t")
+        let currentAudio = null;
 
         function reset() {
             for (let i = 0; i < k.length; i++) {
@@ -218,6 +272,25 @@
                 this.className += " active";
             })
         }
+
+        for (let i = 0; i < t.length; i++) {
+            t[i].addEventListener("click", function () {
+            if (currentAudio) {
+                currentAudio.pause(); 
+                }
+            let audio = new Audio(`${i + 1}.mp3`);
+            audio.play();
+            currentAudio = audio;
+
+            t[i].style.backgroundColor = "rgb(57, 144, 144)"; 
+            for (let j = 0; j < t.length; j++) {
+                if (j !== i) {
+                t[j].style.backgroundColor = "";
+                }
+            }
+            });
+        }
+
 
         function update(i) {
             k[i].style.backgroundColor = "rgb(57, 144, 144)"; 
