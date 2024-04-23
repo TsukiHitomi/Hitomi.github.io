@@ -1,121 +1,255 @@
-    
-    let b = document.querySelector(".b")
-    let p = document.querySelector(".p")
-    let d = document.getElementsByClassName("d")
-    let k = document.getElementsByClassName("k")
-    const playButton = document.getElementById('play-button');
-    console.log(d);
-    console.log(k);
-    
-        // rain---------------------------------------------------------------------------------------------------------------------
-        const box = document.getElementById('rainBox');
-        let boxHeight = box.clientHeight;
-        let boxWidth = box.clientWidth;
-        window.addEventListener('resize', function() {
-            boxHeight = box.clientHeight;
-            boxWidth = box.clientWidth;
-        });
+* {
+    padding: 0;
+    margin: 0;
+}
 
-        const drops = setInterval(() => {
-            const rain = document.createElement('div');
-            rain.classList.add('rain');
-            rain.style.top = 0;
-            rain.style.left = Math.random() * boxWidth + 'px';
-            rain.style.opacity = Math.random();
-            box.appendChild(rain);
-            let race = 1;
-            const timer = setInterval(() => {
-                if (parseInt(rain.style.top) > boxHeight) {
-                    clearInterval(timer);
-                    box.removeChild(rain);
-                }
-                race++;
-                rain.style.top = parseInt(rain.style.top) + race + 'px';
-            }, 20);
-        }, 50);
-        // rain---------------------------------------------------------------------------------------------------------------------
-        const fullscreenImage = document.getElementById('fullscreen-image');
-        const audio = new Audio('data/孤独、梦与奇迹.mp3');
-        audio.loop = true;
+a {
+text-decoration: none;
+color: inherit;
+}
 
-        playButton.addEventListener('mouseover', () => {
-            playButton.style.backgroundColor = 'rgba(255, 255, 255, 0.7)';
-        });
+body {
+    background-color: rgba(163, 168, 168, 0.637);
+    /* background-color:#111827; */
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    /* background-image: url('your_image_url'); */
+    /* background-repeat: no-repeat; */
+    background-size: cover;
+}
 
-        playButton.addEventListener('mouseout', () => {
-            playButton.style.backgroundColor = 'rgba(255, 255, 255, 0.5)';
-        });
+.a {
+    position: relative;
+    width: 1100px;
+    display: flex;
+    justify-content: space-evenly;
+}
 
-        playButton.addEventListener('click', () => {
-            // ------------------rain
-            clearInterval(drops);
-            const rainElements = document.querySelectorAll('.rain');
-            rainElements.forEach(element => {
-                element.remove();
-            });
-            // ------------------rain
-            audio.play();
-            fullscreenImage.style.transform = 'translateX(-100%)';
-            fullscreenImage.style.opacity = '0';
-            setTimeout(() => {
-            fullscreenImage.style.visibility = 'hidden';
-            }, 900);
-        });
-        // ---------------------------------------------------------------------------------------------------------------------
-        
-        let a = function () {
-            for (let i = 0; i < d.length; i++) {
-                d[i].className = "d"
-            }
-        }
+.b {
+    width: 400px;
+    height: 500px;
+    transition: .4s;
+    background-size: cover;
+    /* background-position: center; */
+    /* background-position: top; */
+}
 
-        let s = function () {
-            for (let i = 0; i < k.length; i++) {
-                k[i].className = "k"
-            }
-        }
-     
-        for (let i = 0; i < d.length; i++) {
-            
-            d[i].onmousemove = function () {
-                // k[i].scrollIntoView({ behavior: 'smooth', block: 'center' });
-                b.style.backgroundImage = "url('data/" + [i + 1] + ".jpg')"
-                d[i].addEventListener('click', function() {
-                    k[i].scrollIntoView({ behavior: 'smooth', block: 'center' });
-                  });
-                // p.style.backgroundImage = "url('" + [i + 1] + ".jpg')"
-                // document.body.style.backgroundImage = "url('" + [i + 1] + ".jpg')";
-                update(i);
-                a()
-            }
-        }
+.p {
+    width: 450px;
+    height: 500px;
+    transition: .4s;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-        for (let i = 0; i < k.length; i++) {
-            
-            k[i].onclick = function () {
-                d[i].scrollIntoView({ behavior: 'smooth', block: 'center' });
-                b.style.backgroundImage = "url('data/" + [i + 1] + ".jpg')"
-                // p.style.backgroundImage = "url('" + [i + 1] + ".jpg')"
-                // document.body.style.backgroundImage = "url('" + [i + 1] + ".jpg')";
-                update(i);
-                s()
-            }
-        }
+.g {
+    width: 450px;
+    height: 300px;
+    transition: .4s;
+    background-size: cover;
+    /* background-color: rgba(206, 182, 182, 0.637); */
+    /* display: flex; */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* align-items: flex-start; */
+}
 
-        function update(i) {
-            k[i].style.backgroundColor = "rgb(57, 144, 144)"; 
-            for (let j = 0; j < k.length; j++) {
-            if (j !== i) {
-            k[j].style.backgroundColor = "";
-            }
-            }
-            for (let j = 0; j < d.length; j++) {
-            let element = document.getElementById(j.toString());
-            if (j === i) {
-            element.style.display = 'flex';
-            } 
-            else {
-            element.style.display = 'none';
-            }
-            }
-        }
+.c {
+    width: 200px;
+    height: 500px;
+    /* display: flex; */
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+.d {
+    position: relative;
+    width: 200px;
+    height: 90px;
+    right: 0;
+    /* transition: .5s; */
+    transition: all 0.5s ease;
+    overflow: hidden;
+    /* overflow-y: auto; */
+    margin-bottom: 12.5px;
+}
+
+.k {
+    position: relative;
+    width: 130px;
+    height: 9%;
+    background-color: rgba(224, 233, 233, 0.637);
+    transition: .5s;
+    overflow: hidden;
+    display: flex;
+    /* justify-content: space-between; */
+    align-items: center;
+    /* overflow-y: auto; */
+    margin-bottom: 12.5px;
+}
+
+.lf {
+    position: relative;
+    left: 10px;
+}
+
+.lt {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 200px;
+    height: 50%;
+    /* display: flex; */
+    transition: all 0.5s ease;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    overflow-y: auto;
+    z-index: 1;
+}
+
+.d img {
+    position: absolute;
+    width: 200px;
+    transform: translate(0, -50px);
+    transition: .5s;
+    right: 0;
+}
+
+/* .k img {
+    position: absolute;
+    width: 200px;
+    transform: translate(0, -50px);
+    transition: .5s;
+    right: 0;
+} */
+
+.d.dd {
+    opacity: 0;
+    right: 250px;
+}
+
+.d:hover img {
+    opacity: 0;
+    right: 250px;
+}
+/* .k:hover img {
+    opacity: 0;
+    right: 250px;
+} */
+.k:hover {
+background-color: rgb(57, 144, 144);
+color: rgb(19, 48, 38);
+}
+
+.content {
+    display: none; 
+}
+
+.p-style {
+font-size: 25px;
+text-indent: 2em;
+line-height: 1.5;
+margin-bottom: 10px;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    height: 100%;
+}
+
+.heimu {
+    background-color: #000;
+}
+.heimu:not(:hover),
+.heimu:not(:hover) * {
+    color: #000 !important;
+}
+.heimu:hover {
+    color: #fff;
+}
+
+.c::-webkit-scrollbar {
+display: none;
+}
+
+.lt::-webkit-scrollbar {
+display: none;
+}
+
+/* ------------------------ */
+#fullscreen-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('data/q.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: visible;
+    transition: transform 0.9s ease, opacity 0.9s ease, visibility 0s 0.9s;
+    z-index: 2;
+}
+#play-button {
+    width: 100px;
+    height: 100px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+/* ------------------------ */
+
+@keyframes fadeInOut {
+0% {
+opacity: 0;
+}
+100% {
+opacity: 1;
+}
+}
+
+.fade-in-out {
+animation: fadeInOut .4s linear;
+}
+
+
+/* rain----------------------- */
+/* .ct {
+width: 100vw;
+height: 100vh;
+background: url(8.jpg) center center no-repeat;
+background-size: cover;
+} */
+#rainBox {
+position: fixed;
+top: 0;
+left: 0;
+width: 100vw;
+height: 100vh;
+pointer-events: none;
+}
+.rain {
+position: absolute;
+width: 2px;
+height: 50px;
+background: linear-gradient(rgba(255,255,255,.3), rgba(255,255,255,.6));
+}
+/* rain----------------------- */
